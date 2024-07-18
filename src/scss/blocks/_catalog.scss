@@ -19,6 +19,14 @@
   grid-auto-flow: row dense;
   gap: 35px 15px;
   justify-content: stretch;
+
+  @include netbooks{
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  @include tablet{
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .card{
@@ -34,6 +42,14 @@
   height:250px;
   width:100%;
   overflow: hidden;
+
+  @include netbooks{
+    height:300px;
+  }
+
+  @include tablet{
+    height:250px;
+  }
 }
 
 .card__img:hover .card__img-button {

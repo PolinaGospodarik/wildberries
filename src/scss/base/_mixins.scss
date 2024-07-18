@@ -3,3 +3,21 @@
   font-weight: $weight;
   color: $color;
 }
+
+@mixin netbooks {
+  @media all and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media all and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media all and (max-width: 320px) {
+    @content;
+  }
+}
