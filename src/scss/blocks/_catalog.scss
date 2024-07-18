@@ -1,0 +1,122 @@
+/*CATALOG*/
+.catalog{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px 0;
+}
+
+.catalog__title {
+  text-align: center;
+  margin-bottom: 25px;
+  @include text (26px, 700, $color-title);
+}
+
+.catalog__grid{
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-flow: row dense;
+  gap: 35px 15px;
+  justify-content: stretch;
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.card__img{
+  position: relative;
+  margin: 0 auto 10px;
+  border-radius: 15px;
+  height:250px;
+  width:100%;
+  overflow: hidden;
+}
+
+.card__img:hover .card__img-button {
+  opacity: 1;
+  transition: 0.5s ease;
+}
+.card__img:hover .card__sale {
+  opacity: 0;
+}
+
+.card__img img{
+  height:100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card__img-button{
+  position: absolute;
+  display: inline-block;
+  opacity: 0;
+  top: 81%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 15px);
+  line-height: 38px;
+  border-radius: 10px;
+  background-color: $color-card-img-button;
+  @include text (14px, 400, $color-title);
+}
+
+.card__sale{
+  position: absolute;
+  display: inline-block;
+  background-color: $color-sale;
+  border-radius: 6px;
+  padding: 5px;
+  top: 85%;
+  left: 5%;
+  @include text (14px, 400, $color-primary);
+}
+
+.card__price{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.card__price-sale{
+  @include text (20px, 700, $color-accent);
+}
+
+.card__price-full{
+  @include text (16px, 400, $color-title);
+  text-decoration: line-through;
+}
+
+.card__title{
+  @include text (16px, 700, $color-title);
+  flex-grow: 1;
+  margin-bottom: 10px;
+}
+
+.card__button{
+  border-radius: 10px;
+  line-height: 36px;
+  @include text (16px, 600, $color-primary);
+  width: 100%;
+  background-color: $color-card-button;
+  transition: 0.5s ease;
+}
+
+.card__button::before{
+  content: "\f07a";
+  font-family: "Font Awesome 6 Free", serif;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.card__button:hover{
+  background-color: rgb(189, 118, 248);
+}
+
+.card__button:active{
+  transform: scale(1.1);
+}
