@@ -4,7 +4,6 @@ import {createElement} from "./utils";
 
 export function createSlider(containerMain) {
     // /*СЛАЙДЕР*/
-
     const slider = createElement('section', "slider", null, containerMain );
     const swiperContainer = createElement("section", "swiper", null, slider);
     swiperContainer.classList.add("mySwiper")
@@ -62,4 +61,14 @@ export function createSlider(containerMain) {
         })
     }
     showPicture().then(result => result);
+
+    function showSlider(){
+        slider.style.display = "block";
+    }
+
+    function hideSlider(){
+        slider.style.display = "none";
+    }
+
+    return { showSlider, hideSlider};
 }

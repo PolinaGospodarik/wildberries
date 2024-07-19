@@ -1,8 +1,8 @@
 "use strict";
 
-import {createElement} from "./utils.js";
+import { createElement } from "./utils.js";
 
-export function createHeader(root){
+export function createHeader(root) {
     const header = createElement("header", "header", null, root);
     const headerContainer = createElement("div", "container", null, header);
     const headerNavigation = createElement("div", "header__nav", null, headerContainer);
@@ -20,4 +20,6 @@ export function createHeader(root){
     const button = createElement("div", "header__button", null, headerNavigation);
     const buttonIcon = createElement("i", "fa-solid", null, button);
     buttonIcon.classList.add("fa-cart-shopping");
+
+    return inputSearch;
 }
