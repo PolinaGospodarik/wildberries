@@ -4,16 +4,22 @@ import { createElement } from "./utils.js";
 
 export function createCatalog(containerMain) {
     const catalog = createElement("section", "catalog", null, containerMain);
-    const catalogTitle = createElement("h2", "catalog__title", "Хиты продаж", catalog);
+    // const catalogTitle = createElement("h2", "catalog__title", "Хиты продаж", catalog);
     const catalogGrid = createElement("div", "catalog__grid", null, catalog);
 
-    async function getCards() {
+    const noResultsMessage = createElement("div", "catalog__no-results", "Ничего не найдено", catalog);
+    noResultsMessage.style.display = 'none';
 
-        const response = await fetch("https://6691928a26c2a69f6e90289e.mockapi.io/wildberries");
-        if (!response.ok) {
-            throw new Error('Error!!!!');
+    async function getCards(searchText = "") {
+        const url = new URL("https://6691928a26c2a69f6e90289e.mockapi.io/wildberries");
+        if (searchText) {
+            url.searchParams.append('title', searchText);
         }
+        const response = await fetch(url.toString());
         try {
+            if (!response.ok) {
+                throw new Error('Ошибка сети!');
+            }
             return await response.json();
         } catch (error) {
             console.error('Ошибка при выполнении запроса:', error);
@@ -22,41 +28,46 @@ export function createCatalog(containerMain) {
     }
 
     async function showCards(searchText = "") {
-        const data = await getCards();
+        const data = await getCards(searchText);
 
         // Очистка предыдущих карточек
         catalogGrid.innerHTML = '';
 
-        // Фильтрация данных по заголовку
-        const filteredData = data.filter(item => item.title.toLowerCase().includes(searchText.toLowerCase()));
+        if (data.length === 0) {
+            noResultsMessage.style.display = 'block';
+        } else {
+            noResultsMessage.style.display = 'none';
 
-        for (let i = 0; i < filteredData.length; i++) {
-            const cardsItem = createElement("div", "card", null, catalogGrid);
+            // Фильтрация данных по заголовку
+            // const filteredData = data.filter(item => item.title.toLowerCase().includes(searchText.toLowerCase()));
 
-            const cardImage = createElement("div", "card__img", null, cardsItem);
-            const image = createElement("img", null, null, cardImage);
-            image.src = filteredData[i].picture + `?random=${[i]}`;
+            for (let i = 0; i < data.length; i++) {
+                const cardsItem = createElement("div", "card", null, catalogGrid);
 
-            const cardViewButton = createElement("button", "card__img-button", "Быстрый просмотр", cardImage);
+                const cardImage = createElement("div", "card__img", null, cardsItem);
+                const image = createElement("img", null, null, cardImage);
+                image.src = data[i].picture + `?random=${data[i].sale}`;
 
-            const cardSale = createElement("span", "card__sale", null, cardImage);
-            const discountPercent = filteredData[i].sale*5;
-            cardSale.textContent = String(`-${discountPercent}%`);
+                const cardViewButton = createElement("button", "card__img-button", "Быстрый просмотр", cardImage);
 
-            const cardPrice = createElement("div", "card__price", null, cardsItem);
+                const cardSale = createElement("span", "card__sale", null, cardImage);
+                const discountPercent = data[i].sale * 5;
+                cardSale.textContent = `-${discountPercent}%`;
 
-            const cardPriceSale = createElement("span", "card__price-sale", null, cardPrice);
-            let discountedPrice = Number(filteredData[i].price) * (1 - discountPercent / 100);
-            // discountedPrice = Math.round(discountedPrice);
-            cardPriceSale.textContent = String(discountedPrice.toFixed(2) + "р.");
+                const cardPrice = createElement("div", "card__price", null, cardsItem);
 
-            const cardPriceFull = createElement("span", "card__price-full", null, cardPrice);
-            cardPriceFull.textContent = (filteredData[i].price + `р.`);
+                const cardPriceSale = createElement("span", "card__price-sale", null, cardPrice);
+                let discountedPrice = Number(data[i].price) * (1 - discountPercent / 100);
+                cardPriceSale.textContent = `${discountedPrice.toFixed(2)} р.`;
 
-            const cardTitle = createElement("h3", "card__title", null, cardsItem);
-            cardTitle.textContent = filteredData[i].title;
+                const cardPriceFull = createElement("span", "card__price-full", null, cardPrice);
+                cardPriceFull.textContent = `${data[i].price} р.`;
 
-            const cardButton = createElement("button", "card__button", "Купить", cardsItem);
+                const cardTitle = createElement("h3", "card__title", null, cardsItem);
+                cardTitle.textContent = data[i].title;
+
+                const cardButton = createElement("button", "card__button", "Купить", cardsItem);
+            }
         }
     }
 

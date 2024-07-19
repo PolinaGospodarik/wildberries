@@ -2,12 +2,12 @@
 
 export function createSearch(inputElement, showCards, showSlider, hideSlider) {
     inputElement.addEventListener('input', function(event) {
-        const searchText = event.target.value;
-        showCards(searchText.trim());
-        if (searchText.trim() === "") {
-            showSlider(); // Показываем слайдер, если поле поиска пустое
+        const searchText = event.target.value.trim();
+        showCards(searchText);
+        if (searchText === "") {
+            showSlider();
         } else {
-            hideSlider(); // Скрываем слайдер, если есть текст поиска
+            hideSlider();
         }
     });
 }
