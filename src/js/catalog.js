@@ -40,7 +40,7 @@ export function createCatalog(containerMain){
                 const cardViewButton = createElement("button", "card__img-button", "Быстрый просмотр", cardImage);
 
                 const cardSale = createElement("span", "card__sale", null, cardImage);
-                let discountPercent = Math.floor(Math.random() * (20 - 5 + 1)) + 5;
+                let discountPercent = ("-"+ Math.floor(Math.random() * 100 + 1));
                 cardSale.textContent = String(discountPercent + "%");
 
                 const cardPrice = createElement("div", "card__price", null, cardsItem);

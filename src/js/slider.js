@@ -14,8 +14,8 @@ export function createSlider(containerMain) {
     const swiperButtonNext = createElement("div", "swiper-button-next", null,  swiperContainer );
     const swiperButtonPrev = createElement("div", "swiper-button-prev", null, swiperContainer );
     const swiperPagination = createElement("div", "swiper-pagination", null, swiperContainer);
-    
-    async function showwPicture(){
+
+    async function showPicture(){
         function getPhotos() {
             //возвращаем новый промис
             return new Promise((resolve, reject) => {
@@ -61,5 +61,5 @@ export function createSlider(containerMain) {
 
         })
     }
-    showwPicture().then(result => result);
+    showPicture().then(result => result);
 }

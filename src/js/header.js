@@ -1,6 +1,6 @@
 "use strict";
 
-import {createElement} from "./utils";
+import {createElement} from "./utils.js";
 
 export function createHeader(root){
     const header = createElement("header", "header", null, root);
