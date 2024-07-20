@@ -6,7 +6,7 @@
   padding: 25px 0;
 }
 .catalog__no-results{
-  @include text (26px, 700, $color-title);
+  @include text (26px, 700, $color-text);
 }
 //.catalog__title {
 //  text-align: center;
@@ -79,7 +79,7 @@
   line-height: 38px;
   border-radius: 10px;
   background-color: $color-card-img-button;
-  @include text (14px, 400, $color-title);
+  @include text (14px, 400, $color-text);
 }
 
 .card__sale{
@@ -105,15 +105,26 @@
 }
 
 .card__price-full{
-  @include text (16px, 400, $color-title);
+  @include text (16px, 400, $color-text);
   text-decoration: line-through;
 }
 
 .card__title{
-  @include text (16px, 700, $color-title);
-  flex-grow: 1;
+  @include text (18px, 700, $color-text);
+  margin-bottom: 10px;
+  min-height: 50px;
+}
+
+.card__description {
+  flex-grow:1;
   margin-bottom: 10px;
 }
+
+.card__description {
+  display: none;
+  @include text (16px, 400, $color-text);
+}
+
 
 .card__button{
   border-radius: 10px;

@@ -1,6 +1,7 @@
 "use strict";
 
 import { createElement } from "./utils.js";
+import { createModal } from "./modal-window.js";
 
 export function createCatalog(containerMain) {
     const catalog = createElement("section", "catalog", null, containerMain);
@@ -9,6 +10,8 @@ export function createCatalog(containerMain) {
 
     const noResultsMessage = createElement("div", "catalog__no-results", "Ничего не найдено", catalog);
     noResultsMessage.style.display = 'none';
+
+    const { openModal } = createModal(document.body);
 
     async function getCards(searchText = "") {
         const url = new URL("https://6691928a26c2a69f6e90289e.mockapi.io/wildberries");
@@ -66,7 +69,23 @@ export function createCatalog(containerMain) {
                 const cardTitle = createElement("h3", "card__title", null, cardsItem);
                 cardTitle.textContent = data[i].title;
 
+                const cardDescription = createElement("div", "card__description", null, cardsItem);
+                const description = createElement("p", null, null, cardDescription);
+                description.textContent = data[i].description;
+
                 const cardButton = createElement("button", "card__button", "Купить", cardsItem);
+
+                cardViewButton.addEventListener("click", function(event){
+                    const currentCard = event.target.closest('.card');
+                    const imageSrc = currentCard.querySelector('img').src;
+                    const titleText = currentCard.querySelector('.card__title').textContent;
+                    const priceSale = currentCard.querySelector('.card__price-sale').textContent;
+                    const priceFull = currentCard.querySelector('.card__price-full').textContent;
+                    const descriptionText = currentCard.querySelector('.card__description p').textContent;
+                    openModal(imageSrc, titleText, priceSale, priceFull, descriptionText);
+                })
+
+
             }
         }
     }
