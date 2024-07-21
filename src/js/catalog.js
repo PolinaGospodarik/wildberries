@@ -1,7 +1,8 @@
 "use strict";
 
 import { createElement } from "./utils.js";
-import { createModal } from "./modal-window.js";
+import { createModal } from "./modal-card.js";
+import { updateCartItem } from "./cart-storage.js"
 
 export function createCatalog(containerMain) {
     const catalog = createElement("section", "catalog", null, containerMain);
@@ -11,7 +12,9 @@ export function createCatalog(containerMain) {
     const noResultsMessage = createElement("div", "catalog__no-results", "Ничего не найдено", catalog);
     noResultsMessage.style.display = 'none';
 
-    const { openModal } = createModal(document.body);
+    const { openModalCard } = createModal(document.body);
+    // const { openModalCart } = createModal(document.body);
+
 
     async function getCards(searchText = "") {
         const url = new URL("https://6691928a26c2a69f6e90289e.mockapi.io/wildberries");
@@ -27,6 +30,20 @@ export function createCatalog(containerMain) {
         } catch (error) {
             console.error('Ошибка при выполнении запроса:', error);
             return [];
+        }
+    }
+
+    async function getCardById(id) {
+        const url = `https://6691928a26c2a69f6e90289e.mockapi.io/wildberries/${id}`;
+        const response = await fetch(url);
+        try {
+            if (!response.ok) {
+                throw new Error('Ошибка сети!');
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Ошибка при выполнении запроса:', error);
+            return null;
         }
     }
 
@@ -46,12 +63,31 @@ export function createCatalog(containerMain) {
 
             for (let i = 0; i < data.length; i++) {
                 const cardsItem = createElement("div", "card", null, catalogGrid);
+                cardsItem.setAttribute('id', data[i].id);
 
                 const cardImage = createElement("div", "card__img", null, cardsItem);
                 const image = createElement("img", null, null, cardImage);
-                image.src = data[i].picture + `?random=${data[i].sale}`;
+                image.src = data[i].picture + `?random=${data[i].random}`;
 
                 const cardViewButton = createElement("button", "card__img-button", "Быстрый просмотр", cardImage);
+
+                cardViewButton.addEventListener("click", async function (event) {
+                    const currentCardId = event.target.closest('.card').id;
+                    const cardData = await getCardById(currentCardId);
+
+                    if (cardData) {
+                        openModalCard({
+                            cardId: cardData.id,
+                            imageSrc: cardData.picture + `?random=${cardData.random}`,
+                            title: cardData.title,
+                            priceSale: (cardData.price * (1 - (cardData.sale * 5 ) / 100)).toFixed(2),
+                            price: cardData.price,
+                            description: cardData.description
+                        });
+                    } else {
+                        console.error('Данные карточки не найдены');
+                    }
+                });
 
                 const cardSale = createElement("span", "card__sale", null, cardImage);
                 const discountPercent = data[i].sale * 5;
@@ -61,7 +97,7 @@ export function createCatalog(containerMain) {
 
                 const cardPriceSale = createElement("span", "card__price-sale", null, cardPrice);
                 let discountedPrice = Number(data[i].price) * (1 - discountPercent / 100);
-                cardPriceSale.textContent = `${discountedPrice.toFixed(2)} р.`;
+                    cardPriceSale.textContent = `${discountedPrice.toFixed(2)} р.`;
 
                 const cardPriceFull = createElement("span", "card__price-full", null, cardPrice);
                 cardPriceFull.textContent = `${data[i].price} р.`;
@@ -75,14 +111,10 @@ export function createCatalog(containerMain) {
 
                 const cardButton = createElement("button", "card__button", "Купить", cardsItem);
 
-                cardViewButton.addEventListener("click", function(event){
-                    const currentCard = event.target.closest('.card');
-                    const imageSrc = currentCard.querySelector('img').src;
-                    const titleText = currentCard.querySelector('.card__title').textContent;
-                    const priceSale = currentCard.querySelector('.card__price-sale').textContent;
-                    const priceFull = currentCard.querySelector('.card__price-full').textContent;
-                    const descriptionText = currentCard.querySelector('.card__description p').textContent;
-                    openModal(imageSrc, titleText, priceSale, priceFull, descriptionText);
+                cardButton.addEventListener("click", function(event){
+                    // const currentCard = event.target.closest('.card');
+                    const cardId = event.target.closest('.card').id;
+                    updateCartItem(cardId);
                 })
 
 

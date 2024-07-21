@@ -4,6 +4,50 @@
   color: $color;
 }
 
+@mixin modal($type) {
+  .modal__#{$type} {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $color-modal;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .#{$type}-inner {
+    position: relative;
+    width: 60%;
+    height: 90%;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: $color-modal-form;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .close{
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #000000;
+    font-size: 36px;
+    font-weight: bold;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  .close:hover{
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+}
+
 @mixin netbooks {
   @media all and (max-width: 1024px) {
     @content;

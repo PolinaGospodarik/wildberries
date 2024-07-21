@@ -12,3 +12,35 @@
     return element;
 }
 
+export function createModalWindow(type, body) {
+    const modal = createElement("div", `modal__${type}`, null, body);
+    const modalInner = createElement("div", `${type}-inner`, null, modal);
+    const modalClose = createElement('button', 'close', '&times;', modalInner);
+    return { modal, modalInner, modalClose };
+}
+
+export function setupModalClose(modal) {
+    const modalClose = modal.querySelector('.close');
+
+    function closeModal ()  {
+        modal.style.display = 'none';
+
+        localStorage.removeItem('openCardData');
+    }
+
+    if (modalClose) {
+        modalClose.addEventListener("click", closeModal);
+    }
+
+    window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeModal();
+        }
+    });
+}

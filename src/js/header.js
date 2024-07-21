@@ -1,6 +1,9 @@
 "use strict";
 
 import { createElement } from "./utils.js";
+import {createCart} from "./modal-shopping-cart.js";
+
+const { openModalCart } = createCart(document.body);
 
 export function createHeader(root) {
     const header = createElement("header", "header", null, root);
@@ -17,9 +20,13 @@ export function createHeader(root) {
     inputSearch.setAttribute("id", "search");
     inputSearch.setAttribute("placeholder", "Найти на Wildberries");
 
-    const button = createElement("div", "header__button", null, headerNavigation);
+    const button = createElement("button", "header__button", null, headerNavigation);
     const buttonIcon = createElement("i", "fa-solid", null, button);
     buttonIcon.classList.add("fa-cart-shopping");
+
+    button.addEventListener("click", function() {
+        openModalCart();
+    })
 
     return inputSearch;
 }
