@@ -19,6 +19,39 @@
 }
 html{
   font-family: $font-primary;
+  font-size: 16px; // базовый размер шрифта
+
+  @media all and (max-width: 1160px) {
+    font-size: 15px;
+  }
+
+  @include netbooks {
+    font-size: 14px;
+  }
+
+  @media all and (max-width: 870px) {
+    font-size: 13px;
+  }
+
+  @include tablet {
+    font-size: 14px;
+  }
+
+  @media all and (max-width: 680px) {
+    font-size: 12px;
+  }
+
+  @media all and (max-width: 580px) {
+    font-size: 13px;
+  }
+
+  @media all and (max-width: 480px) {
+    font-size: 12px;
+  }
+
+  @include mobile {
+    font-size: 10px;
+  }
 }
 
 .container{

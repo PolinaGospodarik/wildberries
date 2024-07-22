@@ -40,3 +40,4 @@ export function updateItemQuantity(cardId, quantity) {
 
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
 }
+

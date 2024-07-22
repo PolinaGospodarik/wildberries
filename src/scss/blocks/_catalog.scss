@@ -1,60 +1,78 @@
-/*CATALOG*/
-.catalog{
+.catalog {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 25px 0;
 }
-.catalog__no-results{
-  @include text (26px, 700, $color-text);
-}
-//.catalog__title {
-//  text-align: center;
-//  margin-bottom: 25px;
-//  @include text (26px, 700, $color-title);
-//}
 
-.catalog__grid{
+.catalog__no-results {
+  @include text(1.625rem, 700, $color-text); // 26px
+}
+
+.catalog__grid {
   display: grid;
   width: 100%;
   grid-template-columns: repeat(6, 1fr);
   grid-auto-flow: row dense;
-  gap: 35px 15px;
+  gap: 2.187rem 0.937rem; //35 15
   justify-content: stretch;
 
-  @include netbooks{
-    grid-template-columns: repeat(6, 1fr);
+  @include netbooks {
+    grid-template-columns: repeat(5, 1fr);
   }
 
-  @include tablet{
+  @include tablet {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media all and (max-width: 580px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+
+  @media all and (max-width: 480px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
   @include mobile {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-.card{
+.card {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  @include mobile {
+   width: 100%;
+  }
 }
 
-.card__img{
+.card__img {
   position: relative;
   margin: 0 auto 10px;
   border-radius: 15px;
-  height:250px;
-  width:100%;
+  height: 15.625rem;
+  width: 100%;
   overflow: hidden;
 
-  @include netbooks{
-    height:300px;
+  //@include netbooks {
+  //  height: 17.4rem;
+  //}
+  //@media all and (max-width: 870px) {
+  //  height: 15.4rem;
+  //}
+  //
+  //@include tablet {
+  //  height: 15.625rem;
+  //}
+
+  @media all and (max-width: 480px) {
+
   }
 
-  @include tablet{
-    height:250px;
+  @include mobile {
+    //height: 40rem;
   }
 }
 
@@ -62,17 +80,21 @@
   opacity: 1;
   transition: 0.5s ease;
 }
+
 .card__img:hover .card__sale {
   opacity: 0;
+  @media all and (max-width: 870px) {
+    opacity: 1;
+  }
 }
 
-.card__img img{
-  height:100%;
+.card__img img {
+  height: 100%;
   width: 100%;
   object-fit: cover;
 }
 
-.card__img-button{
+.card__img-button {
   position: absolute;
   display: inline-block;
   opacity: 0;
@@ -80,13 +102,38 @@
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 15px);
-  line-height: 38px;
+  height: 2.375rem; // 38px
   border-radius: 10px;
   background-color: $color-card-img-button;
-  @include text (14px, 400, $color-text);
+
+
+  @media all and (max-width: 870px) {
+    left: 90%;
+    opacity: 1;
+    width: auto;
+    padding: 0 5px;
+  }
 }
 
-.card__sale{
+.img-button__text{
+  @include text(0.875rem, 400, $color-text); // 14px
+  @media all and (max-width: 870px) {
+    display: none;
+  }
+}
+
+.fa-eye {
+  display: none;
+  @include text(1rem, 600, $color-primary); // 36px
+  color: $color-text;
+  @media all and (max-width: 870px) {
+    display: block;
+  }
+}
+
+
+
+.card__sale {
   position: absolute;
   display: inline-block;
   background-color: $color-sale;
@@ -94,62 +141,58 @@
   padding: 5px;
   top: 85%;
   left: 5%;
-  @include text (14px, 400, $color-primary);
+  @include text(0.875rem, 400, $color-primary); // 14px
 }
 
-.card__price{
+.card__price {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
 }
 
-.card__price-sale{
-  @include text (20px, 700, $color-accent);
+.card__price-sale {
+  @include text(1.125rem, 700, $color-accent); // 18px
+  margin-right: 0.312rem;
 }
 
-.card__price-full{
-  @include text (16px, 400, $color-text);
+.card__price-full {
+  @include text(1rem, 400, $color-text); // 16px
   text-decoration: line-through;
 }
 
-.card__title{
-  @include text (18px, 700, $color-text);
+.card__title {
+  @include text(1.125rem, 700, $color-text); // 18px
   margin-bottom: 10px;
-  flex-grow:1;
+  flex-grow: 1;
 }
-
-//.card__description {
-//  flex-grow:1;
-//  margin-bottom: 10px;
-//}
 
 .card__description {
   display: none;
-  @include text (16px, 400, $color-text);
+  @include text(1rem, 400, $color-text); // 16px
 }
 
-
-.card__button{
+.card__button {
   border-radius: 10px;
-  line-height: 36px;
-  @include text (16px, 600, $color-primary);
+  line-height: 2.25rem; // 36p
+  @include text(1rem, 600, $color-primary); // 16px
   width: 100%;
   background-color: $color-card-button;
   transition: 0.5s ease;
 }
 
-.card__button::before{
+.card__button::before {
   content: "\f07a";
   font-family: "Font Awesome 6 Free", serif;
   font-weight: 600;
   margin-right: 10px;
 }
 
-.card__button:hover{
+.card__button:hover {
   background-color: rgb(189, 118, 248);
 }
 
-.card__button:active{
+.card__button:active {
   transform: scale(1.1);
 }

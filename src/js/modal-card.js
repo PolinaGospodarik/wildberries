@@ -3,6 +3,7 @@
 import {createElement, createModalWindow, setupModalClose} from "./utils";
 import {updateCartItem } from "./cart-storage";
 
+
 export function createModal (body) {
     const { modal, modalInner, modalClose } = createModalWindow("card", body);
     const modalLeft = createElement('div', 'card__left', null, modalInner);
@@ -30,6 +31,7 @@ export function createModal (body) {
         modalPriceFull.textContent= `${price}р.`;
         descriptionText.textContent = description || '';
         modal.style.display = 'flex';
+
     }
 
     function restoreModalCard() {

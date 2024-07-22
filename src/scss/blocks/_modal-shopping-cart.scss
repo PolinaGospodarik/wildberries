@@ -3,62 +3,63 @@
 .cart-inner {
   flex-direction: column;
   justify-content: space-between;
-  padding: 40px;
+  padding: 2.5rem; // 40px
 }
 
-
-//.cart-content{
-//  display: flex;
-//  flex-direction: column;
-//  justify-content: space-between;
-//}
-
 .cart-title{
-  @include text( 32px, 700, $color-text);
-  margin-bottom: 20px;
+  @include text( 2rem, 700, $color-text); // 32px
+  margin-bottom: 1.25rem; // 20px
 }
 
 .cart-list{
-  max-height: 60vmin;
+  max-height: 50vmin;
   overflow-y: auto;
   overflow-x: hidden;
-  margin-bottom: 10px ;
-}
+  margin-bottom: 0.625rem; // 10px
+  font-size: 1.25rem;
 
+  @media all and (max-width: 480px) {
+    max-height: 75vmax;
+  }
+
+}
 
 .cart-item{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem; // 20px
+
 }
 
 .cart__title{
-  max-width:150px;
-  @include text (20px, 400, $color-text);
+  max-width: 9.375rem; // 150px
+  @include text (1.25rem, 400, $color-text); // 20px
 }
 
 .cart__price{
-  @include text (20px, 400, $color-text);
+  @include text (1.25rem, 400, $color-text); // 20px
+  width: 7.375rem;
 }
 
 .quantity{
-  @include text (20px, 400, $color-text);
-  margin: 0 10px;
+  @include text (1.25rem, 400, $color-text); // 20px
+  width: .375rem;
+  margin: 0 0.625rem; // 10px
 }
 
 .quantity-minus, .quantity-plus {
-  width:30px;
-  line-height: 30px;
-  border-radius: 5px;
-  font-size: 24px;
+  width: 1.875rem; // 30px
+  line-height: 1.875rem; // 30px
+  border-radius: 0.3125rem; // 5px
+  font-size: 1.5rem; // 24px
   font-weight: 300;
 }
 
 .cart__clear{
-  padding: 10px;
+  padding: 0.625rem; // 10px
   background-color: #ef3232;
-  border-radius: 10px;
+  border-radius: 0.625rem; // 10px
   color: #ffffff;
 }
 
@@ -70,12 +71,23 @@
 }
 
 .clear-button{
-  padding: 15px;
+  padding: 0.9375rem; // 15px
   background-color: #ef3232;
-  border-radius: 10px;
+  border-radius: 0.625rem; // 10px
   color: #ffffff;
+  transition: 0.5s ease;
+
+}
+
+.clear-button:hover, .clear-button:focus{
+  background-color: #f85555;
+}
+
+.clear-button:active{
+  transform: scale(1.1);
 }
 
 .total-price{
-  @include text (24px, 500, $color-text)
+  @include text (1.5rem, 500, $color-text); // 24px
+  margin-right: 0.7rem;
 }

@@ -28,6 +28,17 @@ export function createCart(body) {
         return totalPrice;
     }
 
+    function updateQuantityDisplay(cartItem, newQuantity, allCards) {
+        const itemElement = document.getElementById(`cart-item-${cartItem.id}`);
+        const quantityElement = itemElement.querySelector('.quantity');
+
+        quantityElement.textContent = newQuantity;
+        cartItem.quantity = newQuantity;
+
+        const totalPrice = calculateTotalPrice(JSON.parse(localStorage.getItem('cartItems')), allCards);
+        totalPriceContainer.textContent = `Итоговая сумма: ${totalPrice.toFixed(2)} р.`;
+    }
+
     function openModalCart() {
         modalList.innerHTML = '';  // Очистка предыдущих данных
 
@@ -46,6 +57,7 @@ export function createCart(body) {
                         const card = allCards.find(card => card.id === cartItem.id);
                         if (card) {
                             const cardElement = createElement('div', 'cart-item', null, modalList);
+                            cardElement.id = `cart-item-${cartItem.id}`;
                             const title = createElement('h3', "cart__title", card.title, cardElement);
                             const price = createElement('span', "cart__price", `${(card.price * (1 - (card.sale * 5) / 100)).toFixed(2)} р.`, cardElement);
                             const quantityContainer = createElement('div', "quantity__container", null, cardElement);
@@ -62,13 +74,18 @@ export function createCart(body) {
                             });
 
                             minusButton.addEventListener("click", function () {
-                                updateItemQuantity(cartItem.id, cartItem.quantity - 1);
-                                openModalCart();
+                                if (cartItem.quantity > 1) {
+                                    updateItemQuantity(cartItem.id, cartItem.quantity - 1);
+                                    updateQuantityDisplay(cartItem, cartItem.quantity - 1, allCards);
+                                } else {
+                                    clearCartItem(cartItem.id);
+                                    openModalCart();
+                                }
                             });
 
                             plusButton.addEventListener("click", function () {
                                 updateItemQuantity(cartItem.id, cartItem.quantity + 1);
-                                openModalCart();
+                                updateQuantityDisplay(cartItem, cartItem.quantity + 1, allCards);
                             });
                         }
                     });

@@ -69,7 +69,10 @@ export function createCatalog(containerMain) {
                 const image = createElement("img", null, null, cardImage);
                 image.src = data[i].picture + `?random=${data[i].id}`;
 
-                const cardViewButton = createElement("button", "card__img-button", "Быстрый просмотр", cardImage);
+                const cardViewButton = createElement("button", "card__img-button", null, cardImage);
+                const imgButtonText = createElement("span", "img-button__text", "Быстрый просмотр", cardViewButton);
+                const imgButtonIcon = createElement("i", "fa-solid", null, cardViewButton);
+                imgButtonIcon.classList.add("fa-eye");
 
                 cardViewButton.addEventListener("click", async function (event) {
                     const currentCardId = event.target.closest('.card').id;

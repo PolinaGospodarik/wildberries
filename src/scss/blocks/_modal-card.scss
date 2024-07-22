@@ -2,7 +2,7 @@
 
 .card__left{
   height:100%;
-  width: 50%;
+  width: 100%;
 }
 
 .img{
@@ -14,11 +14,9 @@
 .card__right{
   display: flex;
   flex-direction: column;
-  padding: 50px 30px 30px;
-  //align-items: center;
-  //justify-content: center;
-  width: 50%;
-  //justify-content: center;
+  padding: 3.125rem  1.875rem 1.875rem ; //50 30 30
+  width: 100%;
+
 
 }
 //.text{
@@ -30,8 +28,8 @@
 .title{
   max-width: 450px;
   text-align: center;
-  @include text (36px, 700, $color-text);
-  margin-bottom: 30px;
+  @include text (2.25rem, 700, $color-text);
+  margin-bottom:1.875rem ;
 }
 
 .price{
@@ -39,34 +37,43 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 1.875rem ;
 }
 .price-sale{
-  @include text (26px, 700, $color-accent);
+  @include text (1.625rem, 700, $color-accent);
 }
 
 .price-full{
-  @include text (20px, 400, $color-text);
+  @include text (1.25rem, 400, $color-text);
   text-decoration: line-through;
 }
 
 .description{
   max-width: 450px;
   flex-grow: 1;
+  margin-bottom: 1.875rem ;
 }
 
 .description p{
   //text-align: center;
-  @include text (18px, 400, $color-text);
+  @include text (1.125rem, 400, $color-text);
 }
 
 .button{
   border-radius: 10px;
-  line-height: 56px;
-  @include text (16px, 600, $color-primary);
+  line-height: 3.5rem;
+  @include text (1rem, 600, $color-primary);
   width: 100%;
   background-color: $color-card-button;
   transition: 0.5s ease;
+}
+
+.button:hover{
+  background-color: rgb(189, 118, 248);
+}
+
+.button:active{
+  transform: scale(1.1);
 }
 
 

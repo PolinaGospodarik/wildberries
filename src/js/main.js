@@ -18,3 +18,5 @@ const { showSlider, hideSlider} =createSlider(containerMain);
 const { showCards } = createCatalog(containerMain);
 
 createSearch(inputSearch, showCards, showSlider, hideSlider );
+
+
