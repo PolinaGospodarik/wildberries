@@ -19,13 +19,14 @@ export function createModalWindow(type, body) {
     return { modal, modalInner, modalClose };
 }
 
-export function setupModalClose(modal) {
+export function setupModalClose(modal, closeModalWindow ) {
     const modalClose = modal.querySelector('.close');
 
-    function closeModal ()  {
+    function closeModal() {
         modal.style.display = 'none';
-
-        localStorage.removeItem('openCardData');
+        if (closeModalWindow) {
+            closeModalWindow();
+        }
     }
 
     if (modalClose) {

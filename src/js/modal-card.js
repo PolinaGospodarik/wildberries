@@ -27,7 +27,7 @@ export function createModal (body) {
         modalImage.src = imageSrc ;
         modalTitle.textContent = title || '';
         modalPriceSale.textContent= `${priceSale}р.`;
-        modalPriceFull.textContent= price;
+        modalPriceFull.textContent= `${price}р.`;
         descriptionText.textContent = description || '';
         modal.style.display = 'flex';
     }
@@ -40,8 +40,14 @@ export function createModal (body) {
         }
     }
 
+    function closeModal ()  {
+        modal.style.display = 'none';
+        localStorage.removeItem('openCardData');
+    }
+
     restoreModalCard();
-    setupModalClose(modal);
+    setupModalClose(modal, closeModal);
+
 
     return { modal, openModalCard};
 }

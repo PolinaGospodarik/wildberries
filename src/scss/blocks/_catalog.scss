@@ -23,11 +23,15 @@
   justify-content: stretch;
 
   @include netbooks{
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
   }
 
   @include tablet{
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mobile {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 
@@ -112,13 +116,13 @@
 .card__title{
   @include text (18px, 700, $color-text);
   margin-bottom: 10px;
-  min-height: 50px;
+  flex-grow:1;
 }
 
-.card__description {
-  flex-grow:1;
-  margin-bottom: 10px;
-}
+//.card__description {
+//  flex-grow:1;
+//  margin-bottom: 10px;
+//}
 
 .card__description {
   display: none;

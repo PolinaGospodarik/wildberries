@@ -1,1 +1,81 @@
 @include modal('cart');
+
+.cart-inner {
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+}
+
+
+//.cart-content{
+//  display: flex;
+//  flex-direction: column;
+//  justify-content: space-between;
+//}
+
+.cart-title{
+  @include text( 32px, 700, $color-text);
+  margin-bottom: 20px;
+}
+
+.cart-list{
+  max-height: 60vmin;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-bottom: 10px ;
+}
+
+
+.cart-item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cart__title{
+  max-width:150px;
+  @include text (20px, 400, $color-text);
+}
+
+.cart__price{
+  @include text (20px, 400, $color-text);
+}
+
+.quantity{
+  @include text (20px, 400, $color-text);
+  margin: 0 10px;
+}
+
+.quantity-minus, .quantity-plus {
+  width:30px;
+  line-height: 30px;
+  border-radius: 5px;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.cart__clear{
+  padding: 10px;
+  background-color: #ef3232;
+  border-radius: 10px;
+  color: #ffffff;
+}
+
+.footer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.clear-button{
+  padding: 15px;
+  background-color: #ef3232;
+  border-radius: 10px;
+  color: #ffffff;
+}
+
+.total-price{
+  @include text (24px, 500, $color-text)
+}

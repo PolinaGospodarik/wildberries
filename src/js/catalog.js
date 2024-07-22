@@ -67,7 +67,7 @@ export function createCatalog(containerMain) {
 
                 const cardImage = createElement("div", "card__img", null, cardsItem);
                 const image = createElement("img", null, null, cardImage);
-                image.src = data[i].picture + `?random=${data[i].random}`;
+                image.src = data[i].picture + `?random=${data[i].id}`;
 
                 const cardViewButton = createElement("button", "card__img-button", "Быстрый просмотр", cardImage);
 
@@ -78,7 +78,7 @@ export function createCatalog(containerMain) {
                     if (cardData) {
                         openModalCard({
                             cardId: cardData.id,
-                            imageSrc: cardData.picture + `?random=${cardData.random}`,
+                            imageSrc: cardData.picture + `?random=${cardData.id}`,
                             title: cardData.title,
                             priceSale: (cardData.price * (1 - (cardData.sale * 5 ) / 100)).toFixed(2),
                             price: cardData.price,
@@ -105,9 +105,9 @@ export function createCatalog(containerMain) {
                 const cardTitle = createElement("h3", "card__title", null, cardsItem);
                 cardTitle.textContent = data[i].title;
 
-                const cardDescription = createElement("div", "card__description", null, cardsItem);
-                const description = createElement("p", null, null, cardDescription);
-                description.textContent = data[i].description;
+                // const cardDescription = createElement("div", "card__description", null, cardsItem);
+                // const description = createElement("p", null, null, cardDescription);
+                // description.textContent = data[i].description;
 
                 const cardButton = createElement("button", "card__button", "Купить", cardsItem);
 
@@ -116,7 +116,6 @@ export function createCatalog(containerMain) {
                     const cardId = event.target.closest('.card').id;
                     updateCartItem(cardId);
                 })
-
 
             }
         }

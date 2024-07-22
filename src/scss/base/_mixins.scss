@@ -20,19 +20,23 @@
 
   .#{$type}-inner {
     position: relative;
-    width: 60%;
-    height: 90%;
+    width: 60vmax;
+    height: 100dvh;
     border-radius: 20px;
     overflow: hidden;
     background-color: $color-modal-form;
     display: flex;
     flex-direction: row;
+
+    @include mobile{
+      width: 100%;
+    }
   }
 
   .close{
     position: absolute;
     top: 15px;
-    right: 35px;
+    right: 27px;
     color: #000000;
     font-size: 36px;
     font-weight: bold;
@@ -45,7 +49,6 @@
     text-decoration: none;
     cursor: pointer;
   }
-
 }
 
 @mixin netbooks {
