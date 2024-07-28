@@ -13,7 +13,6 @@ export function createCatalog(containerMain) {
     noResultsMessage.style.display = 'none';
 
     const { openModalCard } = createModal(document.body);
-    // const { openModalCart } = createModal(document.body);
 
 
     async function getCards(searchText = "") {

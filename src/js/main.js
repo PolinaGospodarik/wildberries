@@ -11,12 +11,13 @@ const root = document.querySelector("#root");
 const inputSearch = createHeader(root);
 
 /*MAIN*/
-const main = createElement("main", "main", null, root);
+const main = createElement("main", "main", null, root);4
 const containerMain = createElement("div", "container", null, main);
 
 const { showSlider, hideSlider} =createSlider(containerMain);
 const { showCards } = createCatalog(containerMain);
 
 createSearch(inputSearch, showCards, showSlider, hideSlider );
+
 
 
