@@ -1,6 +1,10 @@
 "use strict";
 
 import {createElement} from "./utils";
+import Swiper from 'swiper';
+import { Navigation, Pagination, Autoplay, Mousewheel, Keyboard } from 'swiper/modules';
+import 'swiper/swiper-bundle.min.css';
+Swiper.use([Navigation, Pagination, Autoplay, Mousewheel, Keyboard]);
 
 export function createSlider(containerMain) {
     // /*СЛАЙДЕР*/
@@ -32,7 +36,6 @@ export function createSlider(containerMain) {
         }
 
         getPhotos().then(data => {
-            console.log(data)
             //отображаем фотографии
             for(let i = 0; i < data.length; i++){
                 const slide = createElement("div", "swiper-slide", null, swiperWrapper)
@@ -57,7 +60,6 @@ export function createSlider(containerMain) {
                 mousewheel: true,
                 keyboard: true,
             });
-
         })
     }
     showPicture().then(result => result);

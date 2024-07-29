@@ -1,11 +1,14 @@
 {
   "name": "wildberries",
   "version": "1.0.0",
+  "homepage": "https://polinagospodarik.github.io/wildberries/",
   "scripts": {
-    "start": "parcel src/index.html --open",
-    "build": "parcel build src/index.html",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "start": "parcel ./src/index.html",
+    "prebuild-dev": "shx rm -rf dist/*",
+    "build-dev": "parcel build ./src/index.html --no-optimize --public-url ./",
+    "prebuild": "shx rm -rf dist/*",
+    "build": "parcel build ./src/index.html --public-url ./",
+    "push-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose"
   },
   "author": "",
   "license": "ISC",
@@ -13,9 +16,9 @@
     "@parcel/transformer-sass": "^2.12.0",
     "gh-pages": "^6.1.1",
     "parcel": "^2.12.0",
-    "sass": "^1.77.6"
-  },
-  "dependencies": {
-    "swiper": "^11.1.4"
+    "push-dir": "^0.4.1",
+    "sass": "^1.77.6",
+    "shx": "^0.3.2",
+    "swiper": "^11.1.8"
   }
 }
